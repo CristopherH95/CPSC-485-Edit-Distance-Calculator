@@ -25,6 +25,7 @@ namespace editdist {
     }
 
     void EditMatrix::printMatrix() {
+        this->fillMatrix();
         std::cout << "  | ";
         for (int i = 0; i < this->str2.size(); i++) {
             std::cout << this->str2[i] << " | ";
@@ -44,9 +45,15 @@ namespace editdist {
 
         for (int i = 1; i < this->matrix.size(); i++) {
             for (int j = 1; j < this->matrix[i].size(); j++) {
-                checks[INSERT_OP] = this->matrix[i - 1][j];
-                checks[DEL_OP] = this->matrix[i][j - 1];
-                checks[MISMATCH_OP] = this->matrix[i - 1][j - 1];
+                if (this->str1[i] != this->str2[j]) {
+                    checks[INSERT_OP] = this->matrix[i - 1][j] + 1;
+                    checks[DEL_OP] = this->matrix[i][j - 1] + 1;
+                    checks[MISMATCH_OP] = this->matrix[i - 1][j - 1] + 1;
+                } else {
+                    checks[INSERT_OP] = this->matrix[i - 1][j];
+                    checks[DEL_OP] = this->matrix[i][j - 1];
+                    checks[MISMATCH_OP] = this->matrix[i - 1][j - 1];
+                }
                 this->matrix[i][j] = *std::min_element(checks.begin(), checks.end());
             }
         }
