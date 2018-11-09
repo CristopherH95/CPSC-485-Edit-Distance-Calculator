@@ -1,5 +1,6 @@
 #include "edit_dist_matrix.hpp"
 #include <iostream>
+#include <utility>
 #include <string>
 
 int main() {
@@ -12,6 +13,10 @@ int main() {
     editdist::EditMatrix edit_dist_matrix = editdist::EditMatrix(s1, s2);
     std::cout << "words: " << s1 << " " << s2 << std::endl;
     edit_dist_matrix.printMatrix();
+    std::cout << "distance: " << edit_dist_matrix.getEditDist() << std::endl;
+    std::pair<std::string, std::string> aligned = edit_dist_matrix.getAlignment();
+    std::cout << "alignment: " << std::endl;
+    std::cout << aligned.first << std::endl << aligned.second << std::endl;
 
     return 0;
 }

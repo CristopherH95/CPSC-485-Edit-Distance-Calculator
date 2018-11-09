@@ -1,4 +1,5 @@
 #include <string>
+#include <utility>
 #include <vector>
 #pragma once
 
@@ -8,6 +9,8 @@ namespace editdist {
         public:
             EditMatrix(const std::string& s1, const std::string& s2);
             void printMatrix();
+            int getEditDist();
+            std::pair<std::string, std::string> getAlignment();
             ~EditMatrix();
         private:
             void fillMatrix();

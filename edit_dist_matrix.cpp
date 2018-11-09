@@ -40,6 +40,45 @@ namespace editdist {
         }
     }
 
+    int EditMatrix::getEditDist() {
+        int n = this->matrix.size() - 1;
+        int m = this->matrix[0].size() - 1;
+        return this->matrix[n][m];
+    }
+
+    std::pair<std::string, std::string> EditMatrix::getAlignment() {
+        std::string word1 = "";
+        std::string word2 = "";
+        int i = this->matrix.size() - 1;
+        int j = this->matrix[0].size() - 1;
+        std::vector<int> checks(3);
+
+        while (i != 0 && j != 0) {
+            checks[INSERT_OP] = this->matrix[i - 1][j];
+            checks[DEL_OP] = this->matrix[i][j - 1];
+            checks[MISMATCH_OP] = this->matrix[i - 1][j - 1];
+            if (checks[MISMATCH_OP] == this->matrix[i][j] || 
+                checks[MISMATCH_OP] + 1 == this->matrix[i][j]) {
+                    word1 += this->str1[i];
+                    word2 += this->str2[j];
+                    i -= 1;
+                    j -= 1;
+            } else if (checks[INSERT_OP] + 1 == this->matrix[i][j]) {
+                word1 += this->str1[i];
+                word2 += '_';
+                i -= 1;
+            } else {
+                word1 += '_';
+                word2 += this->str2[j];
+                j -= 1;
+            }
+        }
+        std::reverse(word1.begin(), word1.end());
+        std::reverse(word2.begin(), word2.end());
+
+        return std::make_pair(word1, word2);
+    }
+
     void EditMatrix::fillMatrix() {
         std::vector<int> checks(3);
 
