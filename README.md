@@ -11,7 +11,7 @@ Compile:
 ```
 make
 ```
-Clean:
+Delete:
 ```
 make clean
 ```
@@ -22,7 +22,7 @@ Compile:
 ```
 mingw32-make
 ```
-Clean:
+Delete:
 ```
 mingw32-make clean
 ```
