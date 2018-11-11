@@ -64,7 +64,7 @@ namespace editdist {
         int j = this->matrix[0].size() - 1;
         int min_move;
 
-        while (i != 0 || j != 0) {
+        while (i > 0 || j > 0) {
             min_move = this->getMinimumMove(i, j);
             
             if (min_move == MISMATCH_OP) {
@@ -119,21 +119,26 @@ namespace editdist {
         int checks[3];
         int move_idx = MISMATCH_OP; // assume match/mismatch
 
-        if (row > 0) {
-            // if can move up get insert/match/mismatch scores
+        if (row > 0 && col > 0) {
+            // get the values for all operations, if possible
             checks[INSERT_OP] = this->matrix[row - 1][col];
+            checks[DEL_OP] = this->matrix[row][col - 1];
             checks[MISMATCH_OP] = this->matrix[row - 1][col - 1];
         } else {
-            // if cannot move up ensure these options will not be chosen
-            checks[INSERT_OP] = INT_MAX;
+            // otherwise, only get values for those operations available
+            // for those that are not, default to max value so they aren't picked
+            // as the minimum
             checks[MISMATCH_OP] = INT_MAX;
-        }
-        if (col > 0) {
-            // if can move left get delete score
-            checks[DEL_OP] = this->matrix[row][col - 1];
-        } else {
-            // if cannot move left ensure delete will not be chosen
-            checks[DEL_OP] = INT_MAX;
+            if (col > 0) {
+                checks[DEL_OP] = this->matrix[row][col - 1];
+            } else {
+                checks[DEL_OP] = INT_MAX;
+            }
+            if (row > 0) {
+                checks[INSERT_OP] = this->matrix[row - 1][col];
+            } else {
+                checks[INSERT_OP] = INT_MAX;
+            }
         }
 
         // check operations other than match/mismatch and see which is less
