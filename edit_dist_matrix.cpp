@@ -22,12 +22,13 @@ namespace editdist {
         // create matrix, save strings 
         this->matrix = std::vector<std::vector<int> >(n, std::vector<int>(m));
         std::cerr << this->matrix.size() << " " << this->matrix[0].size() << std::endl;
-        std::cerr << this->matrix[0][0] << std::endl;
         for (int i = 0; i < n; i++) {
             this->matrix[0][i] = i;    // initialize first row
+            std::cerr << this->matrix[0][i] << std::endl;
         }
         for (int j = 0; j < m; j++) {
             this->matrix[j][0] = j; // initialize first column
+            std::cerr << this->matrix[j][0] << std::endl;
         }
         this->fillMatrix();     // fill the matrix
     }
