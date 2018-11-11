@@ -21,6 +21,7 @@ namespace editdist {
         int m = this->str2.size();
         // create matrix, save strings 
         this->matrix = std::vector<std::vector<int> >(n, std::vector<int>(m));
+        std::cerr << this->matrix.size() << " " << this->matrix[0].size() << std::endl;
         for (int i = 0; i < n; i++) {
             this->matrix[0][i] = i;    // initialize first row
         }
@@ -64,6 +65,8 @@ namespace editdist {
         int j = this->matrix[0].size() - 1;
         int min_move;
 
+        std::cerr << "alignment" << std::endl;
+
         while (i != 0 || j != 0) {
             min_move = this->getMinimumMove(i, j);
             
@@ -96,6 +99,8 @@ namespace editdist {
     // of the two strings
     void EditMatrix::fillMatrix() {
         std::vector<int> checks(3);
+
+        std::cerr << "fill matrix" << std::endl;
 
         for (int i = 1; i < this->matrix.size(); i++) {
             for (int j = 1; j < this->matrix[i].size(); j++) {
