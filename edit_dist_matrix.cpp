@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <climits>
 #include <iostream>
+#include <iomanip>
 
 
 namespace editdist {
@@ -32,15 +33,15 @@ namespace editdist {
 
     // prints out the matrix in a formatted manner
     void EditMatrix::printMatrix() {
-        std::cout << "  | ";
+        std::cout << std::right << std::setw(6) << " | ";
         for (int i = 0; i < this->str2.size(); i++) {
-            std::cout << this->str2[i] << " | ";
+            std::cout << std::right << std::setw(3) << this->str2[i] << " | ";
         }
         std::cout << std::endl;
         for (int n = 0; n < this->matrix.size(); n++) {
-            std::cout << this->str1[n] << " | ";
+            std::cout << std::right << std::setw(3) << this->str1[n] << " | ";
             for (int m = 0; m < this->matrix[n].size(); m++) {
-                std::cout << this->matrix[n][m] << " | ";
+                std::cout << std::right << std::setw(3) << this->matrix[n][m] << " | ";
             }
             std::cout << std::endl;
         }
