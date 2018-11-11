@@ -23,10 +23,12 @@ namespace editdist {
         this->matrix = std::vector<std::vector<int> >(n, std::vector<int>(m));
         std::cerr << this->matrix.size() << " " << this->matrix[0].size() << std::endl;
         for (int i = 0; i < n; i++) {
+            std::cerr << "init first row" << std::endl;
             this->matrix[0][i] = i;    // initialize first row
             std::cerr << this->matrix[0][i] << std::endl;
         }
         for (int j = 0; j < m; j++) {
+            std::cerr << "init first col" << std::endl;
             this->matrix[j][0] = j; // initialize first column
             std::cerr << this->matrix[j][0] << std::endl;
         }
