@@ -21,7 +21,7 @@ namespace editdist {
         private:
             void fillMatrix();
             int getMinimumMove(int row, int col);
-            std::vector<std::vector<int>> matrix;
+            std::vector<std::vector<int> > matrix;
             std::string str1;
             std::string str2;
     };
