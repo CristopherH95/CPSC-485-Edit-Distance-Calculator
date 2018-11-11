@@ -20,7 +20,7 @@ namespace editdist {
         int n = this->str1.size();
         int m = this->str2.size();
         // create matrix, save strings 
-        this->matrix = std::vector<std::vector<int> >(n, std::vector<int>(m));
+        this->matrix = std::vector<std::vector<int> >(n, std::vector<int>(m, 0));
         std::cerr << this->matrix.size() << " " << this->matrix[0].size() << std::endl;
         for (int i = 0; i < n; i++) {
             std::cerr << "init first row" << std::endl;
